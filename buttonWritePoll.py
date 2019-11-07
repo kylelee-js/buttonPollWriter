@@ -1,0 +1,102 @@
+import openpyxl
+from openpyxl.utils.cell import coordinate_from_string, start_cell_column_index_from_string
+
+
+#------------------LOADING---------------------------
+print('Start')
+filename_target = '기초소방시설설치 설문지.xlsx'
+
+wb = openpyxl.load_workbook(filename_target, data_only=True)
+sheet = wb.worksheets[0] 
+
+print('load complete!')
+
+#----------------------------------------------------
+
+start_cell_row = 10
+start_cell_col = start_cell_column_index_from_string("J")
+
+# set excel to school table
+
+def makeSchoolTable(scnm):
+
+    sheet.cell(start_cell_row ,start_cell_col).value = scnm
+    sheet.cell(start_cell_row, start_cell_col + 1).value = "단독주택"
+    sheet.cell(start_cell_row + 1, start_cell_col + 1).value = "다세대주택"
+    sheet.cell(start_cell_row + 2, start_cell_col + 1).value = "연립주택"
+    sheet.cell(start_cell_row + 3, start_cell_col + 1).value = "다중주택"
+    start_cell_row += 5
+
+
+#asdasd
+
+def putValueIn():
+    sheet.cell(start_cell_row, start_cell_col).value = Fire_ex_arr.count("O")
+    sheet.cell(start_cell_row, start_cell_col + 2).value = Fire_ex_arr.count("X")
+    sheet.cell(start_cell_row, start_cell_col + 3).value = Fire_sn_arr.count("O")
+    sheet.cell(start_cell_row, start_cell_col + 4).value = Fire_sn_arr.count("X")
+    
+    sheet.cell(start_cell_row, start_cell_col + 6).value = OO
+    sheet.cell(start_cell_row, start_cell_col + 7).value = OX
+    sheet.cell(start_cell_row, start_cell_col + 8).value = XO
+    sheet.cell(start_cell_row, start_cell_col + 9).value = XX
+
+#-----------------------------------------------------
+
+while True:
+
+    count = 0
+
+    # Write school name
+    school_name = input("학교 이름 : ")
+    if school_name == "save":
+        print("now stop the job and save the sheet")
+        break
+
+    
+    makeSchoolTable(school_name)
+
+    while True:
+        cell = sheet.cell(start_cell_row ,start_cell_start_cell_col)
+        
+        House = input("주택종류 : ")
+        if House == "exit":
+            putValueIn()
+            print("exit the program")
+            break
+
+        Fire_ex = input("소화기 유뮤 (O, X로 표기) : ")
+        Fire_sn = input("경보기 유무 (O, X로 표기) : ")
+
+        Fire_ex_arr = []
+        Fire_sn_arr = []
+
+        Fire_ex_arr.append(Fire_ex)
+        Fire_sn_arr.append(Fire_sn)
+
+        OO, OX, XO, XX = 0
+        
+
+        if Fire_ex_arr[count] == "O" and Fire_sn_arr[count] == "O":
+            OO += 1
+        elif Fire_ex_arr[count] == "O" and Fire_sn_arr[count] == "X":
+            OX += 1
+        elif Fire_ex_arr[count] == "X" and Fire_sn_arr[count] == "O":
+            XO += 1
+        elif Fire_ex_arr[count] == "X" and Fire_sn_arr[count] == "X":
+            XX += 1
+        else:
+            print("입력이 잘못되었습니다")
+
+        count += 1
+        print("count ++1")
+
+        
+#----------------------------------------------------
+
+
+print("Start saving")
+
+wb.save("기초소방시설설치 설문지.xlsx")
+
+print("job done!")
