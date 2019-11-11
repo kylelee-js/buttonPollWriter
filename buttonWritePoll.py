@@ -45,7 +45,11 @@ def putValueIn():
 
 while True:
 
+    # 초기화
     count = 0
+    Fire_ex_arr = []
+    Fire_sn_arr = []
+    OO, OX, XO, XX = 0
 
     # Write school name
     school_name = input("학교 이름 : ")
@@ -57,7 +61,7 @@ while True:
     makeSchoolTable(school_name)
 
     while True:
-        cell = sheet.cell(start_cell_row ,start_cell_start_cell_col)
+        cell = sheet.cell(start_cell_row ,start_cell_col)
         
         House = input("주택종류 : ")
         if House == "exit":
@@ -68,14 +72,9 @@ while True:
         Fire_ex = input("소화기 유뮤 (O, X로 표기) : ")
         Fire_sn = input("경보기 유무 (O, X로 표기) : ")
 
-        Fire_ex_arr = []
-        Fire_sn_arr = []
-
         Fire_ex_arr.append(Fire_ex)
         Fire_sn_arr.append(Fire_sn)
 
-        OO, OX, XO, XX = 0
-        
 
         if Fire_ex_arr[count] == "O" and Fire_sn_arr[count] == "O":
             OO += 1
