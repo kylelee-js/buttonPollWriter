@@ -15,6 +15,8 @@ print('load complete!')
 
 start_cell_row = 10
 start_cell_col = start_cell_column_index_from_string("J")
+count = 0
+
 
 # set excel to school table
 
@@ -45,20 +47,22 @@ def putValueIn():
 
 while True:
 
+
+    # Write school name
+    school_name = input("학교 이름 : ")
+    start_cell_row = start_cell_row + count
+    if school_name == "save":
+        print("now stop the job and save the sheet")
+        break
+
     # 초기화
     count = 0
     Fire_ex_arr = []
     Fire_sn_arr = []
     OO, OX, XO, XX = 0
-
-    # Write school name
-    school_name = input("학교 이름 : ")
-    if school_name == "save":
-        print("now stop the job and save the sheet")
-        break
-
     
     makeSchoolTable(school_name)
+    
 
     while True:
         cell = sheet.cell(start_cell_row ,start_cell_col)
@@ -86,9 +90,9 @@ while True:
             XX += 1
         else:
             print("입력이 잘못되었습니다")
-
+        
         count += 1
-        print("count ++1")
+        print(count)
 
         
 #----------------------------------------------------
