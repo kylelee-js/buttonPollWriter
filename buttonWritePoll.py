@@ -27,7 +27,7 @@ def makeSchoolTable(scnm):
     sheet.cell(start_cell_row + 1, start_cell_col + 1).value = "다세대주택"
     sheet.cell(start_cell_row + 2, start_cell_col + 1).value = "연립주택"
     sheet.cell(start_cell_row + 3, start_cell_col + 1).value = "다중주택"
-    start_cell_row += 5
+    start_cell_row += 5  #다음 칸에 새로운 행렬을 만들기 위해 값 변경
 
 
 #asdasd
@@ -52,7 +52,7 @@ while True:
     school_name = input("학교 이름 : ")
     start_cell_row = start_cell_row + count
     if school_name == "save":
-        print("now stop the job and save the sheet")
+        print("작업을 완료하고 파일을 저장하겠습니다.")
         break
 
     # 초기화
@@ -69,8 +69,8 @@ while True:
         
         House = input("주택종류 : ")
         if House == "exit":
-            putValueIn()
-            print("exit the program")
+            putValueIn()  # 유무기록을 파일에 작성
+            print("다음 작성을 준비합니다.")
             break
 
         Fire_ex = input("소화기 유뮤 (O, X로 표기) : ")
